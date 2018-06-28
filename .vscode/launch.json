@@ -8,8 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Electron Main",
-            "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
+            "cwd": "${workspaceFolder}/src",
+            "runtimeExecutable": "${workspaceFolder}/src/node_modules/.bin/electron.cmd",
             "args": ["."]
         }
     ]
