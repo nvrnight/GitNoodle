@@ -1,0 +1,20 @@
+{
+    "name": "gitnoodle",
+    "version": "0.0.1",
+    "description": "Git GUI Cross Platform",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron ."
+    },
+    "keywords": [
+        "git",
+        "noodle",
+        "gui"
+    ],
+    "author": "James Hastings",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^2.0.3"
+    }
+}
