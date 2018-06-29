@@ -6,6 +6,12 @@ var repos = new Datastore({
     autoload: true
 });
 
+var logs = new Datastore({
+    filename: './db/logs.json',
+    autoload: true
+});
+
 module.exports = {
-    repos: repos
+    repos: repos,
+    logs: logs
 };

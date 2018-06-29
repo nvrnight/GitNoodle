@@ -1,5 +1,21 @@
 const electron = require('electron');
 const { app, BrowserWindow } = electron;
+var db = require('./db');
+
+require('electron-context-menu')({
+	prepend: (params, browserWindow) => {
+        return [{
+            label: 'Add',
+            // Only show it when right-clicking images
+            visible: params.titleText == "left"
+        }, {
+            label: 'Clone',
+            // Only show it when right-clicking images
+            visible: params.titleText == "left"
+        }];
+    },
+    showInspectElement: false
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
