@@ -30,11 +30,22 @@
 <body>
     <div id="app">
         <div id="left" title="left">
-            <div v-for="repo in repos" :path="repo.path">{{ repo.name }}</div>
+            <div @contextmenu.prevent="$refs.leftCtx.open($event, {})">Repos</div>
+            <div v-for="repo in repos" :path="repo.path" @contextmenu.prevent="$refs.repoCtx.open($event, repo)">{{ repo.name }}</div>
         </div>
         <div id="right">
 gr
         </div>
+
+        <context-menu id="repoCtxMenu" ref="repoCtx" @ctx-open="onRepoCtxOpen">
+            <li class="ctx-item">Remove</li>
+            <li class="ctx-item">Delete</li>
+        </context-menu>
+
+        <context-menu id="leftCtxMenu" ref="leftCtx" @ctx-open="onLeftCtxOpen">
+            <li class="ctx-item">Add</li>
+            <li class="ctx-item">Clone</li>
+        </context-menu>
     </div>
 
     <script src="app.js"></script>

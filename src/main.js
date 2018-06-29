@@ -2,21 +2,6 @@ const electron = require('electron');
 const { app, BrowserWindow } = electron;
 var db = require('./db');
 
-require('electron-context-menu')({
-	prepend: (params, browserWindow) => {
-        return [{
-            label: 'Add',
-            // Only show it when right-clicking images
-            visible: params.titleText == "left"
-        }, {
-            label: 'Clone',
-            // Only show it when right-clicking images
-            visible: params.titleText == "left"
-        }];
-    },
-    showInspectElement: false
-});
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -24,27 +9,28 @@ let win
 function createWindow() {
     // Create the browser window.
     let primaryDisplay = electron.screen.getPrimaryDisplay().workArea;
-    win = new BrowserWindow({ width: primaryDisplay.width * .8, height: primaryDisplay.height * .8 })
+    win = new BrowserWindow({ width: primaryDisplay.width * .8, height: primaryDisplay.height * .8 });
 
     // and load the index.html of the app.
-    win.loadFile('index.html')
+    win.loadFile('index.html');
+
 
     // Open the DevTools.
     //win.webContents.openDevTools()
-
+    
     // Emitted when the window is closed.
     win.on('closed', () => {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         win = null
-    })
+    });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -53,7 +39,7 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit()
     }
-})
+});
 
 app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
@@ -61,4 +47,4 @@ app.on('activate', () => {
     if (win === null) {
         createWindow()
     }
-})
+});
