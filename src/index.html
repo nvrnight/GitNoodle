@@ -4,15 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+
+    <style type="text/css">
+        #app {
+            height: 800px;
+            width: 800px;
+        }
+        #left {
+            float: left;
+            display: block;
+            background-color: red;
+            width: 20%;
+            height: 100%;
+        }
+        #right {
+            width: 80%;
+            float: left;
+            display: block;
+            height: 100%;
+            background-color: green;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <ol>
-            <li v-for="todo in todos">
-                {{ todo.text }}
-            </li>
-        </ol>
+        <div id="left">
+            <div v-for="repo in repos" :path="repo.path">{{ repo.name }}</div>
+        </div>
+        <div id="right">
+gr
+        </div>
     </div>
 
     <script src="app.js"></script>
