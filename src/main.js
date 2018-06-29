@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+const electron = require('electron');
+const { app, BrowserWindow } = electron;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -6,7 +7,8 @@ let win
 
 function createWindow() {
     // Create the browser window.
-    win = new BrowserWindow({ width: 800, height: 600 })
+    let primaryDisplay = electron.screen.getPrimaryDisplay().workArea;
+    win = new BrowserWindow({ width: primaryDisplay.width * .8, height: primaryDisplay.height * .8 })
 
     // and load the index.html of the app.
     win.loadFile('index.html')

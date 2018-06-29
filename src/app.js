@@ -11,6 +11,7 @@ async function init() {
                 { name: 'test2', path: '/path2' }
             ]
         }
+        
     });
 }
 
