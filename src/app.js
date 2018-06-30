@@ -16,12 +16,8 @@ async function init() {
         },
         components: { contextMenu: ctxMenu.contextMenu },
         methods: {
-            onRepoCtxOpen: (e, d) => {
-                ctxMenu.show(e);
-            },
-            onLeftCtxOpen: (e, d) => {
-                ctxMenu.show(e);
-            }
+            onRepoCtxOpen: ctxMenu.show,
+            onLeftCtxOpen: ctxMenu.show
         }
     });
 }
