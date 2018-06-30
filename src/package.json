@@ -18,6 +18,7 @@
         "electron": "^2.0.3"
     },
     "dependencies": {
+        "nedb": "^1.8.0",
         "vue": "^2.5.16",
         "vue-context-menu": "^2.0.6"
     }

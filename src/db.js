@@ -1,4 +1,4 @@
-const Datastore = require('nedb-promise');
+const Datastore = require('nedb');
 const path = require('path');
 
 var repos = new Datastore({
@@ -13,5 +13,8 @@ var logs = new Datastore({
 
 module.exports = {
     repos: repos,
-    logs: logs
+    logs: logs,
+    log: async m => {
+        logs.insert({ message: m, createdDate: new Date() }, (e, o) => { if(e) throw e; return o; });
+    }
 };

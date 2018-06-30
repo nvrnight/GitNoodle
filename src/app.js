@@ -1,26 +1,26 @@
 var Vue = require('vue/dist/vue.js');
 var db = require('./db');
-var contextMenu = require('vue-context-menu');
+var ctxMenu = require('./ctxmenu');
 
 async function init() {
+    var repos = await new Promise(function(resolve, reject) {
+        db.repos.find({}).sort({name: 1}).exec((e, repos) => {
+            if(e) reject(e); resolve(repos);
+        });
+    });
+
     new Vue({
         el: '#app',
         data: {
-            //repos: await db.repos.find({})
-            repos: [
-                { name: 'test1', path: '/path1' },
-                { name: 'test2', path: '/path2' }
-            ]
+            repos
         },
-        components: { contextMenu },
+        components: { contextMenu: ctxMenu.contextMenu },
         methods: {
             onRepoCtxOpen: (e, d) => {
-                db.logs.insert(e);
-                db.logs.insert(d);
+                ctxMenu.show(e);
             },
             onLeftCtxOpen: (e, d) => {
-                db.logs.insert(e);
-                db.logs.insert(d);
+                ctxMenu.show(e);
             }
         }
     });
