@@ -9,10 +9,16 @@ async function init() {
         });
     });
 
+    Vue.component('modal', {
+        template: '#modal-template'
+    });
+
     new Vue({
         el: '#app',
         data: {
-            repos
+            repos,
+            showAddRepoModal: false,
+            showCloneRepoModal: false
         },
         components: { contextMenu: ctxMenu.contextMenu },
         methods: {

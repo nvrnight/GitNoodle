@@ -1,0 +1,20 @@
+#app {
+    height: 97vh;
+    width: 98vw;
+    min-width: 800px
+}
+#left {
+    float: left;
+    display: block;
+    background-color: red;
+    width: 20%;
+    height: 100%;
+    min-width: 150px;
+}
+#right {
+    width: 80%;
+    float: left;
+    display: block;
+    height: 100%;
+    background-color: green;
+}
