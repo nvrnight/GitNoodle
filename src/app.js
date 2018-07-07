@@ -17,13 +17,15 @@ async function init() {
         el: '#app',
         data: {
             repos,
-            showAddRepoModal: false,
             showCloneRepoModal: false
         },
         components: { contextMenu: ctxMenu.contextMenu },
         methods: {
             onRepoCtxOpen: ctxMenu.show,
-            onLeftCtxOpen: ctxMenu.show
+            onLeftCtxOpen: ctxMenu.show,
+            addRepo() {
+                console.log(this.$refs.addRepoInput.files);
+            }
         }
     });
 }
