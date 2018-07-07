@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
 
+    <link rel="stylesheet" href="css/bootstrap/neon-glow/css/bootstrap4-neon-glow.min.css" />
     <link rel="stylesheet" href="css/modal.css" />
     <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -47,8 +48,8 @@
             <fieldset>
                 <div @contextmenu.prevent="$refs.leftCtx.open($event, { id: 'leftCtxMenu' });">
                         <legend>Repositories</legend>
-                        <button id="show-modal" @click="showAddRepoModal = true">Add</button>
-                        <button id="show-modal" @click="showCloneRepoModal = true">Clone</button>
+                        <a class="btn btn-success btn-shadow px-3 my-2 ml-0 text-left" href="#!" id="show-modal" @click="showAddRepoModal = true">Add</a>
+                        <a class="btn btn-success btn-shadow px-3 my-2 ml-0 text-left" href="#!" id="show-modal" @click="showCloneRepoModal = true">Clone</a>
                 </div>
                 <div v-for="repo in repos" :path="repo.path" @contextmenu.prevent="$refs.repoCtx.open($event, { id: 'repoCtxMenu', repo: repo });">{{ repo.name }}</div>
             </fieldset>
