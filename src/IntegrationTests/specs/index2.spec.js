@@ -1,5 +1,6 @@
-const chai = require('./chai')
-var app = require('./app');
+
+const chai = require(`./../chai`);
+const app = require(`./../app`);
 
 describe('tester2', () => {
     it('tests the title', async () => {

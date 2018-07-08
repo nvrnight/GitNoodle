@@ -1,7 +1,16 @@
+const specsFolder = './specs/';
+const path = require('path');
+const fs = require('fs');
+
 const Mocha = require('mocha-parallel-tests').default;
-const mocha = new Mocha({
+var mocha = new Mocha({
     timeout: 15000
 });
-mocha.addFile(`${__dirname}/index.spec.js`);
-mocha.addFile(`${__dirname}/index2.spec.js`);
-mocha.run();
+
+fs.readdir(specsFolder, (err, files) => {
+    files.forEach(file => {
+        mocha.addFile(path.join(specsFolder, file));
+    });
+
+    mocha.run();
+});
