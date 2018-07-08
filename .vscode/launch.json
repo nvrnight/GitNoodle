@@ -8,9 +8,18 @@
             "type": "node",
             "request": "launch",
             "name": "Electron Main",
-            "cwd": "${workspaceFolder}/src",
-            "runtimeExecutable": "${workspaceFolder}/src/node_modules/.bin/electron.cmd",
-            "args": ["."]
+            "cwd": "${workspaceFolder}/src/App",
+            "runtimeExecutable": "${workspaceFolder}/src/App/node_modules/.bin/electron.cmd",
+            "args": [".", "--storage=files"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Electron Tests",
+            "cwd": "${workspaceFolder}/src/IntegrationTests",
+            "runtimeExecutable": "npm",
+            "protocol": "legacy",
+            "args": ["test", "--storage=inmemory"]
         }
     ]
 }
