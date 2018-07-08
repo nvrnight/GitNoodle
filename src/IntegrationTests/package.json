@@ -15,5 +15,7 @@
     "mocha-parallel-tests": "^2.0.3",
     "spectron": "^3.8.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "spectron-fake-dialog": "0.0.1"
+  }
 }

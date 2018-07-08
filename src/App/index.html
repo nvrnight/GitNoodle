@@ -42,20 +42,19 @@
             </div>
         </transition>
     </script>
-
     <div id="app">
         <div id="left">
             <fieldset>
                 <div @contextmenu.prevent="$refs.leftCtx.open($event, { id: 'leftCtxMenu' });">
                     <legend>Repositories</legend>
-                    <button class="btn btn-success btn-shadow px-3 my-2 ml-0 text-left" onclick="document.getElementById('addRepoBrowse').click()">Add</button>
+                    <button id="addRepoButton" class="btn btn-success btn-shadow px-3 my-2 ml-0 text-left" @click="addRepo();">Add</button>
                     <button class="btn btn-success btn-shadow px-3 my-2 ml-0 text-left" id="show-modal" @click="showCloneRepoModal = true">Clone</button>
                 </div>
                 <div v-for="repo in repos" :path="repo.path" @contextmenu.prevent="$refs.repoCtx.open($event, { id: 'repoCtxMenu', repo: repo });">{{ repo.name }}</div>
             </fieldset>
         </div>
         <div id="right">
-            gr
+            Right side
         </div>
 
         <context-menu id="repoCtxMenu" ref="repoCtx" @ctx-open="onRepoCtxOpen">
@@ -64,17 +63,15 @@
         </context-menu>
 
         <context-menu id="leftCtxMenu" ref="leftCtx" @ctx-open="onLeftCtxOpen">
-            <li class="ctx-item" onclick="document.getElementById('addRepoBrowse').click()">Add</li>
+            <li class="ctx-item" @click="addRepo();">Add</li>
             <li class="ctx-item" @click="showCloneRepoModal = true">Clone</li>
         </context-menu>
 
         <modal v-if="showCloneRepoModal" @close="showCloneRepoModal = false">
             <h3 slot="header">Clone Repo</h3>
         </modal>
-
-        <input @change="addRepo" ref="addRepoInput" type='file' id="addRepoBrowse" style="display:none" webkitdirectory directory multiple/>
     </div>
-
+    
     <script src="app.js"></script>
 </body>
 

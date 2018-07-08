@@ -1,5 +1,6 @@
 const Application = require('spectron').Application;
 const path = require('path');
+const fakeDialog = require('spectron-fake-dialog');
 
 var electronPath = path.join(__dirname, '..', 'App', 'node_modules', '.bin', 'electron');
 
@@ -13,5 +14,7 @@ var app = new Application({
     path: electronPath,
     args: [appPath, "--storage=inmemory"]
 });
+
+fakeDialog.apply(app);
 
 module.exports = app;

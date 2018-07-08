@@ -13,7 +13,7 @@ function createWindow() {
 
     // and load the index.html of the app.
     win.loadFile('index.html');
-
+    //d = electron.dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']});
 
     // Open the DevTools.
     //win.webContents.openDevTools()
