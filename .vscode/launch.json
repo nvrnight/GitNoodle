@@ -18,7 +18,6 @@
             "name": "Electron Tests",
             "cwd": "${workspaceFolder}/src/IntegrationTests",
             "runtimeExecutable": "npm",
-            "protocol": "legacy",
             "args": ["test"]
         }
     ]
