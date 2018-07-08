@@ -17,8 +17,8 @@
             "request": "launch",
             "name": "Electron Tests",
             "cwd": "${workspaceFolder}/src/IntegrationTests",
-            "runtimeExecutable": "npm",
-            "args": ["test"]
+            "runtimeExecutable": "${workspaceFolder}/src/IntegrationTests/node_modules/.bin/mocha.cmd",
+            "args": ["${file}"]
         }
     ]
 }
