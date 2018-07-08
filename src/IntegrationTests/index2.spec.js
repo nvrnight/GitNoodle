@@ -13,7 +13,7 @@ var appPath = path.join(__dirname, '../App');
 
 var app = new Application({
     path: electronPath,
-    args: [appPath]
+    args: [appPath, "--storage=inmemory"]
 });
 
 global.before(function () {

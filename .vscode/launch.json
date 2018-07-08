@@ -19,7 +19,7 @@
             "cwd": "${workspaceFolder}/src/IntegrationTests",
             "runtimeExecutable": "npm",
             "protocol": "legacy",
-            "args": ["test", "--storage=inmemory"]
+            "args": ["test"]
         }
     ]
 }
