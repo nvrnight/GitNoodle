@@ -10,7 +10,7 @@
             "name": "Electron Main",
             "cwd": "${workspaceFolder}/src/App",
             "runtimeExecutable": "${workspaceFolder}/src/App/node_modules/.bin/electron.cmd",
-            "args": [".", "--storage=files"]
+            "args": ["."]
         },
         {
             "type": "node",
