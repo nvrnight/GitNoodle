@@ -1,2 +1,3 @@
 node_modules
-src/db/*.json
+src/App/db/*.json
+src/IntegrationTests/db/*/json
