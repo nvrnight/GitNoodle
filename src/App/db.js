@@ -25,7 +25,17 @@ var logs = new Datastore(logsConfig);
 module.exports = {
     repos: repos,
     logs: logs,
+    insert: (db, objs) => {
+        return new Promise((resolve, reject) => {
+            db.insert(objs, (e, o) => {
+                if(e)
+                    reject(e);
+                else
+                    resolve(o);
+            });
+        });
+    },
     log: async m => {
-        logs.insert({ message: m, createdDate: new Date() }, (e, o) => { if(e) throw e; return o; });
+        return await insert(logs, { message: m, createdDate: new Date() });
     }
 };
