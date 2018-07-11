@@ -1,5 +1,6 @@
 const electron = require('electron');
 const { app, BrowserWindow } = electron;
+const config = require('./config');
 var db = require('./db');
 
 // Keep a global reference of the window object, if you don't, the window will

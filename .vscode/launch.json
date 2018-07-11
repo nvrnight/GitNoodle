@@ -18,7 +18,7 @@
             "name": "Electron Tests",
             "cwd": "${workspaceFolder}/src/IntegrationTests",
             "runtimeExecutable": "${workspaceFolder}/src/IntegrationTests/node_modules/.bin/mocha.cmd",
-            "args": ["${file}"]
+            "args": ["${file}", "--storage=inmemory"]
         }
     ]
 }
