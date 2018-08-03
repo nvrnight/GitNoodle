@@ -30,23 +30,9 @@ async function init() {
             onLeftCtxOpen: ctxMenu.show,
             addRepo() {
                 let folderPaths = remote.dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']});
-                let nonGitFolderPaths = [];
-                let gitFolderPaths = [];
 
-                let hasGitFolderFunc = (folderPath) => {
-                    return new Promise((resolve, reject) => {
-                        fs.readdir(folderPath, {}, (e, files) => {
-                            if(e) reject(e);
-                            else resolve(files.includes('.git'));
-                        });
-                    });
-                };
-                _.each(folderPaths, async folderPath => {
-                    if(await hasGitFolderFunc(folderPath)) {
-                        gitFolderPaths.push(folderPath);
-                    } else {
-                        nonGitFolderPaths.push(folderPath);
-                    }
+                let gitFolderPaths = _.filter(folderPaths, folderPath => {
+                    return fs.readdirSync(folderPath).includes('.git');
                 });
 
                 db.repos.find({ path: { $in: gitFolderPaths } }, async (e, repositories) => {
@@ -62,7 +48,15 @@ async function init() {
                         return { path: folderToAdd, name: folderToAdd.split(path.sep).pop() }
                     }).value();
 
-                    this.repos = await db.insert(db.repos, foldersToAdd);
+                    let newRepos = await db.insert(db.repos, foldersToAdd);
+
+                    newRepos.forEach(x => {
+                        this.repos.push(x);
+                    });
+
+                    this.repos = _.sortBy(this.repos, x => {
+                        return x.name;
+                    });
                 });
             }
         }

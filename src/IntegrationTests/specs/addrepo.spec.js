@@ -29,6 +29,7 @@ describe('add repository', () => {
 
         let repos = await app.client.$$('.repo');
         repos.length.should.equal(2);
+
         await app.stop();
     });
 });
