@@ -28,35 +28,48 @@ async function init() {
         methods: {
             onRepoCtxOpen: ctxMenu.show,
             onLeftCtxOpen: ctxMenu.show,
-            addRepo() {
+            async removeRepo(repo) {
+                await new Promise((resolve, reject) => {
+                    db.repos.remove({ _id: repo._id }, {}, (e, numRemoved) => {
+                        if(e) reject(e); resolve(numRemoved);
+                    });
+                });
+                
+                this.repos = this.repos.filter(x => {
+                    return x._id != repo._id;
+                });
+            },
+            async addRepo() {
                 let folderPaths = remote.dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']});
 
                 let gitFolderPaths = _.filter(folderPaths, folderPath => {
                     return fs.readdirSync(folderPath).includes('.git');
                 });
 
-                db.repos.find({ path: { $in: gitFolderPaths } }, async (e, repositories) => {
-                    if(e) throw e;
-
-                    let repositoryPaths = _.map(repositories, repository => {
-                        return repository.path;
+                let repositories = await new Promise((resolve, reject) => {
+                    db.repos.find({ path: { $in: gitFolderPaths } }, async (e, o) => {
+                        if(e) reject(e); resolve(o);
                     });
+                });
+                
+                let repositoryPaths = _.map(repositories, repository => {
+                    return repository.path;
+                });
 
-                    let foldersToAdd = _.chain(gitFolderPaths).filter(gitFolderPath => {
-                        return !repositoryPaths.includes(gitFolderPath);
-                    }).map(folderToAdd => {
-                        return { path: folderToAdd, name: folderToAdd.split(path.sep).pop() }
-                    }).value();
+                let foldersToAdd = _.chain(gitFolderPaths).filter(gitFolderPath => {
+                    return !repositoryPaths.includes(gitFolderPath);
+                }).map(folderToAdd => {
+                    return { path: folderToAdd, name: folderToAdd.split(path.sep).pop() }
+                }).value();
 
-                    let newRepos = await db.insert(db.repos, foldersToAdd);
+                let newRepos = await db.insert(db.repos, foldersToAdd);
 
-                    newRepos.forEach(x => {
-                        this.repos.push(x);
-                    });
+                newRepos.forEach(x => {
+                    this.repos.push(x);
+                });
 
-                    this.repos = _.sortBy(this.repos, x => {
-                        return x.name;
-                    });
+                this.repos = _.sortBy(this.repos, x => {
+                    return x.name;
                 });
             }
         }

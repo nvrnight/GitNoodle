@@ -58,7 +58,7 @@
         </div>
 
         <context-menu id="repoCtxMenu" ref="repoCtx" @ctx-open="onRepoCtxOpen">
-            <li class="ctx-item">Remove</li>
+            <li class="ctx-item" @click="removeRepo($refs.repoCtx.locals.repo);">Remove</li>
             <li class="ctx-item">Delete</li>
         </context-menu>
 
