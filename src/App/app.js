@@ -1,7 +1,7 @@
-var Vue = require('vue/dist/vue.js');
-var db = require('./db');
-var ctxMenu = require('./ctxmenu');
-const fs = require('fs');
+const Vue = require('vue/dist/vue.js');
+const db = require('./db');
+const ctxMenu = require('./ctxmenu');
+const fs = require('fs-extra');
 const { remote } = require('electron');
 const path = require('path');
 const _ = require('underscore');
@@ -22,12 +22,32 @@ async function init() {
         data: {
             repos,
             showCloneRepoModal: false,
+            repoToDelete: null,
             errorMessage: ""
         },
         components: { contextMenu: ctxMenu.contextMenu },
         methods: {
             onRepoCtxOpen: ctxMenu.show,
             onLeftCtxOpen: ctxMenu.show,
+            async deleteRepo() {
+                let repoToDelete = this.repoToDelete;
+
+                if(repoToDelete != null) {
+                    if(await fs.exists(repoToDelete.path))
+                        await fs.remove(repoToDelete.path);
+
+                    await new Promise((resolve, reject) => {
+                        db.repos.remove({ _id: repoToDelete._id }, {}, (e, numRemoved) => {
+                            if(e) reject(e); resolve(numRemoved);
+                        });
+                    });
+
+                    this.repos = this.repos.filter(x => {
+                        return x._id != repoToDelete._id;
+                    });
+                }
+                this.repoToDelete = null;
+            },
             async removeRepo(repo) {
                 await new Promise((resolve, reject) => {
                     db.repos.remove({ _id: repo._id }, {}, (e, numRemoved) => {

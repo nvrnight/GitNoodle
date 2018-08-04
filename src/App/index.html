@@ -19,19 +19,16 @@
         
                 <div class="modal-header">
                     <slot name="header">
-                    default header
                     </slot>
                 </div>
         
                 <div class="modal-body">
                     <slot name="body">
-                    default body
                     </slot>
                 </div>
         
                 <div class="modal-footer">
                     <slot name="footer">
-                    default footer
                     <button class="modal-default-button btn btn-success btn-shadow px-3 my-2 ml-0 text-left" @click="$emit('close')">
                         OK
                     </button>
@@ -59,7 +56,7 @@
 
         <context-menu id="repoCtxMenu" ref="repoCtx" @ctx-open="onRepoCtxOpen">
             <li id="repoCtxRemove" class="ctx-item" @click="removeRepo($refs.repoCtx.locals.repo);">Remove</li>
-            <li class="ctx-item">Delete</li>
+            <li id="repoCtxDelete" class="ctx-item" @click="repoToDelete = $refs.repoCtx.locals.repo">Delete</li>
         </context-menu>
 
         <context-menu id="leftCtxMenu" ref="leftCtx" @ctx-open="onLeftCtxOpen">
@@ -69,6 +66,19 @@
 
         <modal v-if="showCloneRepoModal" @close="showCloneRepoModal = false">
             <h3 slot="header">Clone Repo</h3>
+        </modal>
+
+        <modal v-if="repoToDelete != null" @close="repoToDelete = null">
+            <h3 slot="header">Delete Repository</h3>
+
+            <div style="width: 100%;" slot="body">
+                <span style="color: red;">WARNING: </span>This change is irreversible. This will delete the entire repository from your computer.
+            </div>
+
+            <div style="width: 100%;" slot="footer">
+                <button id="deleteRepoNo" style="float: right;" class="btn btn-danger btn-shadow px-3 my-2 ml-0 text-left" @click="repoToDelete = null">No</button>
+                <button id="deleteRepoYes" style="float: left;" class="modal-default-button btn btn-success btn-shadow  px-3 my-2 ml-0 text-left" @click="deleteRepo();">Yes</button>
+            </div>
         </modal>
     </div>
     
