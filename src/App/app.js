@@ -5,6 +5,7 @@ const fs = require('fs-extra');
 const { remote } = require('electron');
 const path = require('path');
 const _ = require('underscore');
+const CloneForm = require('./cloneform');
 
 async function init() {
     var repos = await new Promise(function(resolve, reject) {
@@ -25,7 +26,7 @@ async function init() {
             repoToDelete: null,
             errorMessage: ""
         },
-        components: { contextMenu: ctxMenu.contextMenu },
+        components: { contextMenu: ctxMenu.contextMenu, cloneForm: CloneForm },
         methods: {
             onRepoCtxOpen: ctxMenu.show,
             onLeftCtxOpen: ctxMenu.show,

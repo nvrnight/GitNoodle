@@ -29,9 +29,6 @@
         
                 <div class="modal-footer">
                     <slot name="footer">
-                    <button class="modal-default-button btn btn-success btn-shadow px-3 my-2 ml-0 text-left" @click="$emit('close')">
-                        OK
-                    </button>
                     </slot>
                 </div>
                 </div>
@@ -51,7 +48,7 @@
             </fieldset>
         </div>
         <div id="right">
-            Right side
+            
         </div>
 
         <context-menu id="repoCtxMenu" ref="repoCtx" @ctx-open="onRepoCtxOpen">
@@ -66,6 +63,9 @@
 
         <modal v-if="showCloneRepoModal" @close="showCloneRepoModal = false">
             <h3 slot="header">Clone Repo</h3>
+            <div style="width: 100%" slot="body">
+                <clone-form v-on:clone-done="showCloneRepoModal = false" >
+            </div>
         </modal>
 
         <modal v-if="repoToDelete != null" @close="repoToDelete = null">
