@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const Mocha = require('mocha-parallel-tests').default;
 var mocha = new Mocha({
-    timeout: 15000
+    timeout: 60000
 });
 
 fs.readdir(specsFolder, (err, files) => {

@@ -23,7 +23,7 @@ describe('add repository', () => {
         await fs.mkdir(path.join(testDirPath, 'repo2', '.git'));
 
         await app.start();
-        fakeDialog.mock([ { method: 'showOpenDialog', value: [path.join(testDirPath, 'repo1'), path.join(testDirPath, 'repo2'), path.join(testDirPath, 'repo3')] } ]);
+        await fakeDialog.mock([ { method: 'showOpenDialog', value: [path.join(testDirPath, 'repo1'), path.join(testDirPath, 'repo2'), path.join(testDirPath, 'repo3')] } ]);
         await app.client.waitUntilWindowLoaded();
         await app.client.click('#addRepoButton');
 

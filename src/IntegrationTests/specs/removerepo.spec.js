@@ -21,7 +21,7 @@ describe('remove repository', () => {
         await fs.mkdir(path.join(testDirPath, 'repo1', '.git'));
 
         await app.start();
-        fakeDialog.mock([ { method: 'showOpenDialog', value: [path.join(testDirPath, 'repo1')] } ]);
+        await fakeDialog.mock([ { method: 'showOpenDialog', value: [path.join(testDirPath, 'repo1')] } ]);
         await app.client.waitUntilWindowLoaded();
         await app.client.click('#addRepoButton');
         await app.client.rightClick('.repo');

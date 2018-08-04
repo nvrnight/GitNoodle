@@ -12,6 +12,9 @@ var appPath = path.join(__dirname, '../App');
 
 var app = new Application({
     path: electronPath,
+    webdriverOptions: {
+        deprecationWarnings: false
+    },
     args: [appPath, "--storage=inmemory"]
 });
 
